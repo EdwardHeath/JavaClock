@@ -1,8 +1,15 @@
-let hourHand = document.getElementById('hour-hand')
-let minuteHand = document.getElementById('minute-hand')
-let secondHand = document.getElementById('second-hand')
+let analog = document.getElementsByClassName("analog")[0];
+let hourHand = document.getElementById("hour-hand");
+let minuteHand = document.getElementById("minute-hand");
+let secondHand = document.getElementById("second-hand");
+
+let digital = document.getElementsByClassName("digital")[0];
 let time = document.getElementById("time");
-let date = document.getElementById('date');
+let date = document.getElementById("date");
+
+let toggle = document.getElementById("switch");
+
+toggle.addEventListener("click", toggleType);
 
 function setTime() {
   let now = new Date();
@@ -12,9 +19,9 @@ function setTime() {
   let second = now.getSeconds();
   let period = hour > 12 ? "PM" : "AM";
 
-  let hourDegrees = (hour * 30) + (minute * 0.5) + 90;
-  let minuteDegrees = (minute * 6) + (second * 0.1) + 90;
-  let secondDegrees = (second * 6) + 90;
+  let hourDegrees = hour * 30 + minute * 0.5 + 90;
+  let minuteDegrees = minute * 6 + second * 0.1 + 90;
+  let secondDegrees = second * 6 + 90;
 
   fixFlicker(hourHand, hourDegrees);
   fixFlicker(minuteHand, minuteDegrees);
@@ -24,13 +31,28 @@ function setTime() {
   minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
   secondHand.style.transform = `rotate(${secondDegrees}deg)`;
 
-  let dayOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][now.getDay()];
-  let month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][now.getMonth()];
+  let dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
+    now.getDay()
+  ];
+  let month = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ][now.getMonth()];
   let day = now.getDate();
   let year = now.getFullYear();
 
   // converts from 24 hour clock
-  hour = hour == 0 ? 12 : (hour > 12 ? hour - 12 : hour);
+  hour = hour == 0 ? 12 : hour > 12 ? hour - 12 : hour;
 
   hour = hour < 10 ? `0${hour}` : `${hour}`;
   minute = minute < 10 ? `0${minute}` : `${minute}`;
@@ -38,15 +60,27 @@ function setTime() {
 
   time.innerHTML = `${hour}:${minute}:${second} ${period}`;
 
-  date.innerHTML = `${dayOfWeek} ${month} ${day} ${year}`
+  date.innerHTML = `${dayOfWeek} ${month} ${day} ${year}`;
 
   document.title = time.innerHTML;
+
+  document.body.style.backgroundColor = `hsl(${secondDegrees},50%,50%)`;
 }
 
-function fixFlicker(hand,degrees) {
-    if (degrees == 90) {
-        hand.style.transition = 'all 0.0s';
-    }
+function fixFlicker(hand, degrees) {
+  if (degrees == 90) {
+    hand.style.transition = "all 0.0s";
+  }
+}
+
+function toggleType() {
+  if (toggle.checked == true) {
+    digital.style.display = "block";
+    analog.style.display = "none";
+  } else {
+    digital.style.display = "none";
+    analog.style.display = "block";
+  }
 }
 
 setTime();
