@@ -65,6 +65,8 @@ function setTime() {
   document.title = time.innerHTML;
 
   document.body.style.backgroundColor = `hsl(${secondDegrees},50%,50%)`;
+  document.body.style.transition = 'all 1s linear';
+  
 }
 
 function fixFlicker(hand, degrees) {
