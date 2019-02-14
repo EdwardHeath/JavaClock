@@ -7,9 +7,10 @@ let digital = document.getElementsByClassName("digital")[0];
 let time = document.getElementById("time");
 let date = document.getElementById("date");
 
-let toggle = document.getElementById("switch");
+let toggle = document.getElementById("toggle");
 
-toggle.addEventListener("click", toggleType);
+analog.addEventListener("click", toggleType);
+digital.addEventListener("click", toggleType);
 
 function setTime() {
   let now = new Date();
@@ -76,13 +77,8 @@ function fixFlicker(hand, degrees) {
 }
 
 function toggleType() {
-  if (toggle.checked == true) {
-    digital.style.display = "block";
-    analog.style.display = "none";
-  } else {
-    digital.style.display = "none";
-    analog.style.display = "block";
-  }
+  analog.classList.toggle('hidden');
+  digital.classList.toggle('hidden');
 }
 
 setTime();

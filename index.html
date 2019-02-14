@@ -7,6 +7,8 @@
     <title>JavaClock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='./style.css'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./clock-icon.png">
 </head>
 
 <body>
@@ -17,16 +19,10 @@
             <div class='hand' id='second-hand'></div>
         </div>
     </div>
-    <div class='digital'>
+    <div class='digital hidden'>
         <div id="time">00:00:00</div>
         <div id="date">Sun Jan 1, 2000</div>
     </div>
-    Analog
-    <label class='switch'>
-        <input type='checkbox' id='switch'>
-        <span class='slider round'></span>
-    </label>
-    Digital
 
     <script src='./script.js'></script>
 
